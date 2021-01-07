@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-#include <GL/glut.h>
+#include <GL/GL.h>
+#include "glut.h"
 #include <vector>
 #include "board final.cpp"
 
@@ -61,7 +62,7 @@ static void resize(int width, int height) //callback pour la taille de fenêtre
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-1,10,-1,10);
+    gluOrtho2D(-1,10,-10,1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity() ;
 }
@@ -73,13 +74,13 @@ static void displayennemi() //gère l'affichage des ennemis
     glLoadIdentity();
     for (int i=0;i<10;i++){
         for (int j=0;j<10;j++){
-            vector<int> color = getColortouche(playerBoard.couleurs[i][j]);
+            vector<int> color = getColortouche(botBoard.couleurs[i][j]);
             glColor3f(color[0],color[1],color[2]);
             glutSolidCube(0.5);
             glTranslated(1,0,0);
         }
         glTranslated(-10,0,0);
-        glTranslated(0,1,0);
+        glTranslated(0,-1,0);
     }
 
     glutSwapBuffers();
@@ -98,7 +99,7 @@ static void displayallie() //gère l'affichage des alliés
             glTranslated(1,0,0);
         }
         glTranslated(-10,0,0);
-        glTranslated(0,1,0);
+        glTranslated(0,-1,0);
     }
 
     glutSwapBuffers();
@@ -120,7 +121,7 @@ static void key(unsigned char key, int x, int y) //callback du clavier
 
 static void idle(void) 
 {
-    	int choiceX; //chiffre
+    int choiceX; //chiffre
 	int choiceY; //alphabet
 	char Y;
 	string playerMoveRes, computerMoveRes;
@@ -163,11 +164,13 @@ int main(int argc, char** argv) //main
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
     glutCreateWindow("Grille adverse");
+    glutInitWindowPosition(0, 0);
     glutReshapeFunc(resize);
     glutDisplayFunc(displayennemi);
     glutKeyboardFunc(key);
     glutIdleFunc(idle);
     glutCreateWindow("Ma grille");
+    glutInitWindowPosition(600, 600);
     glutReshapeFunc(resize);
     glutDisplayFunc(displayallie);
     glutKeyboardFunc(key);
