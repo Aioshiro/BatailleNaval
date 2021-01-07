@@ -108,7 +108,7 @@ public:
 	{
 		if (dir == 'r')
 		{
-			if (taille + colonne > 10)
+			if (taille + colonne > 10) // ship will be out of the board on the right
 			{
 				return true;
 			}
@@ -116,7 +116,7 @@ public:
 			{
 				for (int i = colonne; i < colonne + taille; i++)
 				{
-					if (grid[ligne][i] != 0)
+					if (grid[ligne][i] != 0) //ship is colliding with an already placed ship
 					{
 						return true;
 					}
@@ -125,13 +125,13 @@ public:
 		}
 		else if (dir == 'd')
 		{
-			if (taille + ligne > 10)
+			if (taille + ligne > 10) //ship will be out of the board on the down side
 			{
 				return true;
 			}
 			else
 			{
-				for (int i = ligne; i < ligne + taille; i++)
+				for (int i = ligne; i < ligne + taille; i++) //ship is colliding with an already place ship
 				{
 					if (grid[i][colonne] != 0)
 					{
@@ -140,7 +140,12 @@ public:
 				}
 			}
 		}
+		return false;
 	}
+
+	/// <summary>
+	/// \Brief Prompts the player to place his ships
+	/// </summary>
 	void placerplayer()
 	{
 
@@ -183,12 +188,17 @@ public:
 					}
 					siplace = true;
 				}
+				else {
+					cout << "Impossible to place ship, try again" << endl;
+				}
 			}
 		}
 
 
 	}
-
+	/// <summary>
+	/// \Randomly places the computer ships
+	/// </summary>
 	void placerordi()
 	{
 		// ordi
@@ -219,7 +229,9 @@ public:
 			}
 		}
 	}
-
+	/// <summary>
+	/// \Brief Displays the grid in text form
+	/// </summary>
 	void displayGrid()
 	{
 		for (int i = 0; i < 10; i++)
@@ -232,7 +244,12 @@ public:
 		}
 		cout << endl;
 	}
-
+	/// <summary>
+	/// /Brief Checks if a ship is hit by a shot
+	/// </summary>
+	/// <param name="x"> X coordinate of the shot</param>
+	/// <param name="y"> Y coordinate of the shot</param>
+	/// <returns> Return "Rate" if not hit, touché if hit, "Victory" if it's the end of the game throw and exit on an unvalid shot</returns>
 	string hit(int x, int y)
 	{
 		if (x < 0 || y < 0 || x > 9 || y > 9)
@@ -240,7 +257,7 @@ public:
 			cerr << "Error : trying to fire outside grid bounds." << endl;
 			exit(-1);
 		}
-		int a = 1;
+		bool victory = false;
 		int ship = grid[x][y];
 
 		bool lostGame = true;
@@ -251,26 +268,28 @@ public:
 			return("Raté");
 		}
 		else {
-            couleurs[x][y]='r';
+			couleurs[x][y] = 'r';
 			grid[x][y] = 0;
-			return ("touché");
-		}
 
-		for (int i = 0; i < 10; i++)
-		{
-			for (int j = 0; j < 10; j++)
+			for (int i = 0; i < 10; i++)
 			{
-
-				if (grid[i][j] != 0)
+				for (int j = 0; j < 10; j++)
 				{
-					a=a*0;
+					if (grid[i][j] != 0)
+					{
+						victory = false;
+					}
 				}
 			}
-		}
 
-		if (a=1)
-		{
-			return(endGame);
+			if (victory)
+			{
+				cout << endGame << endl;
+				exit(0);
+			}
+			else {
+				return ("touché");
+			}
 		}
 	}
 };
