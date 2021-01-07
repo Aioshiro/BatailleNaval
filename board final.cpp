@@ -2,8 +2,13 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
 using namespace std;
+
+/// <summary>
+/// \class Board
+///		\brief A class which take care of the board
+///		Contains methods to place ships, displaying the grid in text form, check for hit
+/// </summary>
 
 class Board
 {
