@@ -13,12 +13,28 @@ using namespace std;
 class Board
 {
 protected:
-
-	int lengthOfShips[5] = { 5,4,3,3,2 };
+	/// <summary>
+	///\var int lengthOfShips[5]
+	///		\brief Describes the players fleet
+	///		Contains the ships, described by their size
+	/// </summary>
+	int lengthOfShips[5] = { 5,4,3,3,2 }; 
 
 public:
+    /// <summary>
+    /// \var int** grid
+	///		Represents the terrain
+    /// </summary>
     int** grid;
+    /// <summary>
+    /// \var vector<vector<char>> couleurs
+	///		Memorize which cases are hit
+    /// </summary>
     vector<vector<char>> couleurs;
+	/// <summary>
+	/// \var static string endGame
+	///  \brief Text shown at the end of the game
+	/// </summary>
 	static string endGame;
 
 	Board(string fileName)
@@ -39,7 +55,10 @@ public:
 	{
 		delete(grid);
 	}
-
+	/// <summary>
+	/// \fn void createGrid()
+	/// \brief Initialize the grid
+	/// </summary>
 	void createGrid()
 	{
 		grid = new int* [10];
