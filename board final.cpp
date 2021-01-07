@@ -86,7 +86,7 @@ public:
 				{
 					i = line[0] - '0';
 					lengthOfShips[i] = line[2] - '0';
-					cout << lengthOfShips[i] << endl;
+					//cout << lengthOfShips[i] << endl;
 
 
 				}
@@ -169,13 +169,10 @@ public:
 				col--;
 				cout << "Y (A-J) : ";
 				cin >> L;
-				toupper(L);
+				L=toupper(L);
 				lig = L - 'A';
 				cout << "Direction (d/r) : ";
 				cin >> dir;
-				/* col=0;
-				lig=i;
-				dir='r'; */
 				int taille = lengthOfShips[i];
 				if (!impossibleplacer(taille, dir, col, lig))
 				{
@@ -183,11 +180,11 @@ public:
 					{
 						if (dir == 'd')
 						{
-							grid[j + lig][col] = 1;
+							grid[j + lig][col] = taille;
 						}
 						else if (dir == 'r')
 						{
-							grid[lig][j + col] = 1;
+							grid[lig][j + col] = taille;
 						}
 					}
 					siplace = true;
