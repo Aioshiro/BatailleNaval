@@ -1,0 +1,5 @@
+CMAKE_MINIMUM_REQUIRED(VERSION  3.19)
+project(BatailleNavale)
+add_executable(BatailleNavale batailleNavaleFinale.cpp boardFinal.cpp)
+include_directories(include)
+set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
