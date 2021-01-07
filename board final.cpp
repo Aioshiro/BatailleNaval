@@ -14,7 +14,6 @@ class Board
 {
 protected:
 	/// <summary>
-	///\var int lengthOfShips[5]
 	///		\brief Describes the players fleet
 	///		Contains the ships, described by their size
 	/// </summary>
@@ -22,17 +21,14 @@ protected:
 
 public:
     /// <summary>
-    /// \var int** grid
 	///		Represents the terrain
     /// </summary>
     int** grid;
     /// <summary>
-    /// \var vector<vector<char>> couleurs
-	///		Memorize which cases are hit
+	///		Memorizes which cases are hit
     /// </summary>
     vector<vector<char>> couleurs;
 	/// <summary>
-	/// \var static string endGame
 	///  \brief Text shown at the end of the game
 	/// </summary>
 	static string endGame;
@@ -55,8 +51,8 @@ public:
 	{
 		delete(grid);
 	}
+
 	/// <summary>
-	/// \fn void createGrid()
 	/// \brief Initialize the grid
 	/// </summary>
 	void createGrid()
