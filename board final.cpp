@@ -17,26 +17,30 @@ protected:
 	///		\brief Describes the players fleet
 	///		Contains the ships, described by their size
 	/// </summary>
-	int lengthOfShips[5] = { 5,4,3,3,2 }; 
+	int lengthOfShips[5] = { 5,4,3,3,2 };
 
 public:
-    /// <summary>
+	/// <summary>
 	///		Represents the terrain
-    /// </summary>
-    int** grid;
-    /// <summary>
+	/// </summary>
+	vector<vector<int>> grid;
+	/// <summary>
 	///		Memorizes which cases are hit
-    /// </summary>
-    vector<vector<char>> couleurs;
+	/// </summary>
+	vector<vector<char>> couleurs;
 	/// <summary>
 	///  \brief Text shown at the end of the game
 	/// </summary>
 	static string endGame;
 
+	Board() {
+		createGrid();
+	}
+
 	Board(string fileName)
 	{
 		createGrid();
-        couleurs.resize(10);
+		couleurs.resize(10);
 		for (int i = 0; i < 10; i++) {
 			couleurs[i].resize(10);
 			for (int j = 0; j < 10; j++) {
@@ -48,7 +52,7 @@ public:
 
 	~Board()
 	{
-		delete(grid);
+
 	}
 
 	/// <summary>
@@ -56,10 +60,10 @@ public:
 	/// </summary>
 	void createGrid()
 	{
-		grid = new int* [10];
+		grid.resize(10);
 		for (int i = 0; i < 10; i++)
 		{
-			grid[i] = new int[10];
+			grid[i].resize(10);
 			for (int j = 0; j < 10; j++)
 			{
 				grid[i][j] = 0; //intialized to 0 (no ships)
@@ -73,7 +77,6 @@ public:
 	void loadDataFromFile(string fileName)
 	{
 		int i = 0;
-		int ship = 0;
 		string line;
 		ifstream myfile(fileName);
 		if (myfile.is_open())
@@ -81,9 +84,9 @@ public:
 			{
 				while (getline(myfile, line))
 				{
-					i = line[0]-'0';
-					lengthOfShips[i] = line[2]-'0';
-					cout<< lengthOfShips[i]<<endl;
+					i = line[0] - '0';
+					lengthOfShips[i] = line[2] - '0';
+					cout << lengthOfShips[i] << endl;
 
 
 				}
@@ -166,6 +169,7 @@ public:
 				col--;
 				cout << "Y (A-J) : ";
 				cin >> L;
+				toupper(L);
 				lig = L - 'A';
 				cout << "Direction (d/r) : ";
 				cin >> dir;
@@ -257,39 +261,39 @@ public:
 			cerr << "Error : trying to fire outside grid bounds." << endl;
 			exit(-1);
 		}
-		bool victory = false;
 		int ship = grid[x][y];
-
-		bool lostGame = true;
 
 		if (ship == 0)
 		{
-		    couleurs[x][y]='w';
+			couleurs[x][y] = 'w';
 			return("Raté");
 		}
 		else {
 			couleurs[x][y] = 'r';
 			grid[x][y] = 0;
+			checkForVictory();
+			return ("touché");
+		}
+	}
 
-			for (int i = 0; i < 10; i++)
+	void checkForVictory() {
+		bool victory = true;
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
 			{
-				for (int j = 0; j < 10; j++)
+				if (grid[i][j] != 0)
 				{
-					if (grid[i][j] != 0)
-					{
-						victory = false;
-					}
+					victory = false;
 				}
 			}
+		}
 
-			if (victory)
-			{
-				cout << endGame << endl;
-				exit(0);
-			}
-			else {
-				return ("touché");
-			}
+		if (victory)
+		{
+			cout << endGame << endl;
+			exit(0);
 		}
 	}
 };
+
