@@ -16,7 +16,7 @@ Board botBoard("config1.txt");
 Board playerBoard("config1.txt");
 
 
-vector<int> getColortouche(char c){
+vector<int> getColortouche(char c){ //renvoie une couleur selon le charactère en entrée
     if (c=='b'){
         return {0,0,1};
     }
@@ -29,7 +29,7 @@ vector<int> getColortouche(char c){
     return {0,0,0};
 }
 
-vector<int> getColorbateau(int c){
+vector<int> getColorbateau(int c){ //renvoie une couleur selon le type de bateau
     switch(c){
     case(0):{
         return {1,1,1};
@@ -56,7 +56,7 @@ vector<int> getColorbateau(int c){
 }
 
 
-static void resize(int width, int height)
+static void resize(int width, int height) //callback pour la taille de fenêtre
 {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
@@ -66,7 +66,7 @@ static void resize(int width, int height)
     glLoadIdentity() ;
 }
 
-static void displayennemi()
+static void displayennemi() //gère l'affichage des ennemis
 {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -85,7 +85,7 @@ static void displayennemi()
     glutSwapBuffers();
 }
 
-static void displayallie()
+static void displayallie() //gère l'affichage des alliés
 {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -105,7 +105,7 @@ static void displayallie()
 }
 
 
-static void key(unsigned char key, int x, int y)
+static void key(unsigned char key, int x, int y) //callback du clavier
 {
     switch (key)
     {
@@ -118,7 +118,7 @@ static void key(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-static void idle(void)
+static void idle(void) 
 {
     	int choiceX; //chiffre
 	int choiceY; //alphabet
@@ -155,7 +155,7 @@ static void idle(void)
     glutPostRedisplay();
 }
 
-int main(int argc, char** argv)
+int main(int argc, char** argv) //main
 {
     glutInit(&argc, argv);
     glutInitWindowSize(640,480);
