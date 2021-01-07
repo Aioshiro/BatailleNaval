@@ -37,14 +37,13 @@ public:
 	{
 		createGrid();
         couleurs.resize(10);
-        for (int i=0;i<10;i++){
-        couleurs[i].resize(10);
-        for (int j=0;j<10;j++){
-            couleurs[i][j]='b';
-        }
-    }
+		for (int i = 0; i < 10; i++) {
+			couleurs[i].resize(10);
+			for (int j = 0; j < 10; j++) {
+				couleurs[i][j] = 'b';
+			}
+		}
 		loadDataFromFile(fileName);
-		//initGrid();
 	}
 
 	~Board()
@@ -63,11 +62,14 @@ public:
 			grid[i] = new int[10];
 			for (int j = 0; j < 10; j++)
 			{
-				grid[i][j] = 0;
+				grid[i][j] = 0; //intialized to 0 (no ships)
 			}
 		}
 	}
-
+	/// <summary>
+	/// \brief Load the file to read the fleet, if issue reading file, fleet is { 5,4,3,3,2 } by default.
+	/// </summary>
+	/// <param name="fileName"> Name of the file </param>
 	void loadDataFromFile(string fileName)
 	{
 		int i = 0;
@@ -94,6 +96,14 @@ public:
 	}
 
 
+	/// <summary>
+	/// \Brief Check is the placement of a ship is impossible
+	/// </summary>
+	/// <param name="taille"> Size of the grid</param>
+	/// <param name="dir"> Direction of the ship (d for down, r for right)</param>
+	/// <param name="colonne"> Number of the row </param>
+	/// <param name="ligne"> Number of the row </param>
+	/// <returns> Boolean true if it's not possible to place the ship</returns>
 	bool impossibleplacer(int taille, char dir, int colonne, int ligne)
 	{
 		if (dir == 'r')
