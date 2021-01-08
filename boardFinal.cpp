@@ -12,14 +12,14 @@ using namespace std;
 
 class Board
 {
-protected:
-	/// <summary>
-	///		\brief Describes the players fleet
-	///		Contains the ships, described by their size
-	/// </summary>
-	int lengthOfShips[5] = { 5,4,3,3,2 };
 
 public:
+	/// <summary>
+///		\brief Describes the players fleet
+///		Contains the ships, described by their size
+/// </summary>
+	int lengthOfShips[5] = { 5,4,3,3,2 };
+
 	/// <summary>
 	///		Represents the terrain
 	/// </summary>
@@ -40,13 +40,6 @@ public:
 	Board(string fileName)
 	{
 		createGrid();
-		couleurs.resize(10);
-		for (int i = 0; i < 10; i++) {
-			couleurs[i].resize(10);
-			for (int j = 0; j < 10; j++) {
-				couleurs[i][j] = 'b';
-			}
-		}
 		loadDataFromFile(fileName);
 	}
 
@@ -61,12 +54,15 @@ public:
 	void createGrid()
 	{
 		grid.resize(10);
+		couleurs.resize(10);
 		for (int i = 0; i < 10; i++)
 		{
 			grid[i].resize(10);
+			couleurs[i].resize(10);
 			for (int j = 0; j < 10; j++)
 			{
 				grid[i][j] = 0; //intialized to 0 (no ships)
+				couleurs[i][j] = 'c';
 			}
 		}
 	}
