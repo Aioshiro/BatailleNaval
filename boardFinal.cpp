@@ -100,7 +100,7 @@ public:
 
 
 	/// <summary>
-	/// \Brief Check is the placement of a ship is impossible
+	/// \brief Check is the placement of a ship is impossible
 	/// </summary>
 	/// <param name="taille"> Size of the grid</param>
 	/// <param name="dir"> Direction of the ship (d for down, r for right)</param>
@@ -147,7 +147,7 @@ public:
 	}
 
 	/// <summary>
-	/// \Brief Prompts the player to place his ships
+	/// \brief Prompts the player to place his ships
 	/// </summary>
 	void placerplayer()
 	{
@@ -198,7 +198,7 @@ public:
 
 	}
 	/// <summary>
-	/// \Randomly places the computer ships
+	/// \brief Randomly places the computer ships
 	/// </summary>
 	void placerordi()
 	{
@@ -231,7 +231,7 @@ public:
 		}
 	}
 	/// <summary>
-	/// \Brief Displays the grid in text form
+	/// \brief Displays the grid in text form
 	/// </summary>
 	void displayGrid()
 	{
@@ -246,7 +246,7 @@ public:
 		cout << endl;
 	}
 	/// <summary>
-	/// /Brief Checks if a ship is hit by a shot
+	/// /brief Checks if a ship is hit by a shot
 	/// </summary>
 	/// <param name="x"> X coordinate of the shot</param>
 	/// <param name="y"> Y coordinate of the shot</param>
@@ -274,7 +274,7 @@ public:
 	}
 
 	/// <summary>
-	/// \Brief Checks if current attacked player have no ships left
+	/// \brief Checks if current attacked player have no ships left
 	/// </summary>
 	void checkForVictory() {
 		bool victory = true;

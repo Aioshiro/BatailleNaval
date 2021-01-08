@@ -16,7 +16,13 @@ string Board::endGame = "Coulé ! Fin du jeu.";
 Board botBoard("config1.txt");
 Board playerBoard("config1.txt");
 
-
+/// <summary>
+/// \brief returns a vector of int corresponding to the color which has the initial of the entry
+/// Returns (0,0,1) for 'b' (blue), (1,0,0) for 'r' (red) , (1,1,1) for 'w' (white) and (0,0,0) (black) for anything else.
+/// Used to know if the case have been it and if there was a ship here
+/// </summary>
+/// <param name="c">Initial of the color</param>
+/// <returns> Vector<int> of size 3 whith a rgb color</returns>
 vector<int> getColortouche(char c){ //renvoie une couleur selon le charactère en entrée
     if (c=='b'){
         return {0,0,1};
@@ -29,7 +35,12 @@ vector<int> getColortouche(char c){ //renvoie une couleur selon le charactère en
     }
     return {0,0,0};
 }
-
+/// <summary>
+/// \brief returns a vector of int corresponding to the type of the ship
+/// Used to color the player ships on it's grid
+/// </summary>
+/// <param name="c">Number corresponding the ship</param>
+/// <returns> Vector<int> of size 3 whith a rgb color</returns>
 vector<int> getColorbateau(int c){ //renvoie une couleur selon le type de bateau
     switch(c){
     case(0):{
@@ -56,7 +67,11 @@ vector<int> getColorbateau(int c){ //renvoie une couleur selon le type de bateau
     }
 }
 
-
+/// <summary>
+/// \brief The callback for the resize of the window
+/// </summary>
+/// <param name="width">New width of the window</param>
+/// <param name="height">New height of the window</param>
 static void resize(int width, int height) //callback pour la taille de fenêtre
 {
     glViewport(0, 0, width, height);
@@ -66,7 +81,10 @@ static void resize(int width, int height) //callback pour la taille de fenêtre
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity() ;
 }
-
+/// <summary>
+/// \brief The display callback for the computer window
+/// Show initialy the grid with every case in blue, which become red or white when hit depending if there was a ship or not
+/// </summary>
 static void displayennemi() //gère l'affichage des ennemis
 {
 
@@ -85,7 +103,10 @@ static void displayennemi() //gère l'affichage des ennemis
 
     glutSwapBuffers();
 }
-
+/// <summary>
+/// \brief The callback for the display of the player grid
+/// Display the grid of the player, all white except on cases where there is a ship, it's color depending on it's length
+/// </summary>
 static void displayallie() //gère l'affichage des alliés
 {
 
@@ -110,7 +131,12 @@ static void displayallie() //gère l'affichage des alliés
     glutSwapBuffers();
 }
 
-
+/// <summary>
+/// \brief The callback for the keyboard, only 'q' to quit
+/// </summary>
+/// <param name="key">The key pressed</param>
+/// <param name="x"> X coordinate of the mouse</param>
+/// <param name="y">Y coordinate of the mouse</param>
 static void key(unsigned char key, int x, int y) //callback du clavier
 {
     switch (key)
@@ -124,6 +150,10 @@ static void key(unsigned char key, int x, int y) //callback du clavier
     glutPostRedisplay();
 }
 
+/// <summary>
+/// \brief Idle callback, it's the main loop to play
+/// When called, trigger a round (a player and a computer attack) and checks for end of game
+/// </summary>
 static void idle(void)
 {
     int choiceX; //chiffre
@@ -160,6 +190,9 @@ static void idle(void)
     }
     glutPostRedisplay();
 }
+/// <summary>
+/// \brief Initialize everything in Glut
+/// </summary>
 
 int main(int argc, char** argv) //main
 {
