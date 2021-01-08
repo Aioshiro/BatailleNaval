@@ -93,8 +93,13 @@ static void displayallie() //gère l'affichage des alliés
     glLoadIdentity();
     for (int i=0;i<10;i++){
         for (int j=0;j<10;j++){
-            vector<int> color = getColorbateau(playerBoard.grid[i][j]);
-            glColor3f(color[0],color[1],color[2]);
+            if (playerBoard.couleurs[i][j] == 'r') {
+                glColor3f(1, 0, 0);
+            }
+            else{
+                vector<int> color = getColorbateau(playerBoard.grid[i][j]);
+                glColor3f(color[0], color[1], color[2]);
+            }
             glutSolidCube(0.5);
             glTranslated(1,0,0);
         }
@@ -119,40 +124,40 @@ static void key(unsigned char key, int x, int y) //callback du clavier
     glutPostRedisplay();
 }
 
-static void idle(void) 
+static void idle(void)
 {
     int choiceX; //chiffre
-	int choiceY; //alphabet
-	char Y;
-	string playerMoveRes, computerMoveRes;
-    		//Player turn
-		cout << "C'est au joueur de jouer." << endl;
-		cout << "Où tirer ? X(1-10) :";
-		cin >> choiceX;
-		choiceX--;
-		cout << "Y(A-J):";
-		cin >> Y;
-		choiceY = Y - 'A';
-		cout << choiceY;
-		playerMoveRes = botBoard.hit(choiceX, choiceY);
-		cout << playerMoveRes << endl;
-		if (playerMoveRes == Board::endGame)
-		{
-			cout << "Gagné ! Bien joué." << endl;
-		}
-		//Bot turn
-		cout << "C'est à l'ordinateur de jouer." << endl;
-		cout << "Votre plateau est :" << endl;
-		playerBoard.displayGrid();
-		choiceX = rand() % 10;
-		choiceY = rand() % 10;
-		cout << "L'ordinateur tire en " << choiceX << "," << choiceY << " !" << endl;
-		computerMoveRes = playerBoard.hit(choiceX, choiceY);
-		cout << computerMoveRes << endl;
-		if (computerMoveRes == Board::endGame)
-		{
-			cout << "Perdu ! Dommage." << endl;
-		}
+    int choiceY; //alphabet
+    char Y;
+    string playerMoveRes, computerMoveRes;
+    //Player turn
+    cout << "C'est au joueur de jouer." << endl;
+    cout << "Où tirer ? X(1-10) :";
+    cin >> choiceX;
+    choiceX--;
+    cout << "Y(A-J):";
+    cin >> Y;
+    choiceY = Y - 'A';
+    cout << choiceY;
+    playerMoveRes = botBoard.hit(choiceX, choiceY);
+    cout << playerMoveRes << endl;
+    if (playerMoveRes == Board::endGame)
+    {
+        cout << "Gagné ! Bien joué." << endl;
+    }
+    //Bot turn
+    cout << "C'est à l'ordinateur de jouer." << endl;
+    cout << "Votre plateau est :" << endl;
+    playerBoard.displayGrid();
+    choiceX = rand() % 10;
+    choiceY = rand() % 10;
+    cout << "L'ordinateur tire en " << choiceX << "," << choiceY << " !" << endl;
+    computerMoveRes = playerBoard.hit(choiceX, choiceY);
+    cout << computerMoveRes << endl;
+    if (computerMoveRes == Board::endGame)
+    {
+        cout << "Perdu ! Dommage." << endl;
+    }
     glutPostRedisplay();
 }
 
