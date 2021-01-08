@@ -254,9 +254,7 @@ public:
 			cerr << "Error : trying to fire outside grid bounds." << endl;
 			exit(-1);
 		}
-		int ship = grid[x][y];
-
-		if (ship == 0)
+		if (grid[x][y] == 0)
 		{
 			couleurs[x][y] = 'w';
 			return("Raté");
