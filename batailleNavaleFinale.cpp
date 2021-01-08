@@ -7,7 +7,7 @@
 #include <GL/GL.h>
 #include "glut.h"
 #include <vector>
-#include "board final.cpp"
+#include "boardFinal.cpp"
 
 using namespace std;
 
